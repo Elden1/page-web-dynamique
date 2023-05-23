@@ -1,3 +1,29 @@
+//display an mùodify the layout for the modal screen
+let inputAll = document.querySelectorAll(".projectsMod");
+let loginTxt = document.getElementById('loginId');
+
+function hideModal () {
+for (let i = 0; i < inputAll.length; i++){
+    let modalDisplay = inputAll[i]
+    modalDisplay.style = "display:none"
+
+if (localStorage.token){
+    modalDisplay.style = "display:visible"
+    let catMod = document.querySelector(".categories").style = "display:none"
+
+    loginTxt.innerHTML = "logout"
+    loginTxt.href = './index.html'
+    loginTxt.addEventListener("click", event =>{
+    localStorage.removeItem("token")
+    })
+} else {
+    modalDisplay.style = "display:none"
+    loginTxt.innerHTML = "login"
+}
+
+}};
+hideModal();
+
 // get the gallery class 
 let gallery = document.querySelector(".gallery");
 
@@ -32,17 +58,8 @@ for (let g = 0; g < galleryCat.length; g++){
 
 let categoriesTab = document.querySelectorAll(".categoriesTab");
 
-for (let g = 0; g < categoriesTab.length; g++){
-    let catid = categoriesTab[g].id
-
-    categoriesTab.forEach((categoriesTab) => {
-        categoriesTab.classList.remove('selected')
-    })
-}
-
 // fetch data
 async function worksData() {
-    
     try {
     const res = await fetch('http://localhost:5678/api/works')
     let data = await res.json();
@@ -50,6 +67,7 @@ async function worksData() {
     //create elements using the fetched data
     for (let i = 0; i < data.length; i++) {
         let newFigure = document.createElement("figure");
+        newFigure.classList.add('main-content')
         newFigure.setAttribute('categoryId', data[i].categoryId);
         gallery.append(newFigure)   
 
@@ -69,17 +87,11 @@ async function worksData() {
         newFigure.append(figCap)
         figCap.append(figCapData)
     }
-}
-
-    catch (error){
+} catch (error){
         console.error(error);
-    }
-    
-  };
+}};
 //call function
 worksData();
-
-//make categories dynamic on click
 
 //main selecteur
 function removeClass () {
@@ -105,9 +117,13 @@ totSelect.addEventListener('click', () => {
     totCat();
 });
 
+// select all figure with category
+
+let categorySelector = document.querySelector('.categories')
+//assign each category id to a specific class
+
 function totCat(){
     let allCat = document.querySelectorAll('figure[categoryId]')
-    
 // pour chaque figure, vérifier l'attribut categoryId et la comparée avec une valeur
 for (let i = 0; i < allCat.length; i++){
     let allCatId = allCat.item(i).getAttribute("categoryId");
@@ -119,12 +135,12 @@ for (let i = 0; i < allCat.length; i++){
     modifAttribut.setAttribute('style', 'display:block');
 }};
 
-
 objSelect.addEventListener('click', () => {
     removeClass();
     objCat();
 });
 
+let cat = document.querySelectorAll('figure[categoryId="1"]')
 function objCat (){
     let allCat = document.querySelectorAll('figure[categoryId]')
     let cat = document.querySelectorAll('figure[categoryId="1"]')
@@ -146,12 +162,10 @@ for (let i = 0; i < allCat.length; i++){
     modifAttribut.setAttribute('style', 'display:none');
 }}};
 
-
 appSelect.addEventListener('click', () => {
     removeClass();
     appCat();
 });
-
 function appCat (){
     let allCat = document.querySelectorAll('figure[categoryId]')
     let cat = document.querySelectorAll('figure[categoryId="2"]')
@@ -169,7 +183,6 @@ for (let i = 0; i < allCat.length; i++){
 } else {
     modifAttribut.setAttribute('style', 'display:none');
 }}};
-
 
 hotSelect.addEventListener('click', () => {
     removeClass();
@@ -195,14 +208,18 @@ for (let i = 0; i < allCat.length; i++){
 }}
 }
 
-function removeClass () {
-    let categoriesTab = document.querySelectorAll(".categoriesTab");
+let form  = document.querySelector('.close')
 
-    for (let g = 0; g < categoriesTab.length; g++){
-        let catid = categoriesTab[g].id
-    
-        categoriesTab.forEach((categoriesTab) => {
-            categoriesTab.classList.remove('selected')
-        })
+form.addEventListener('click', async event  =>{
+    event.preventDefault()
+    let allMainImg = document.querySelectorAll('.main-content')
+
+    for (var i = 0; i < allMainImg.length; i++){
+
+    let mainImgRemover = allMainImg[i]
+
+    mainImgRemover.remove()
+    console.log('passed')
     }
-}
+    worksData()
+})

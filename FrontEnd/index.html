@@ -7,17 +7,73 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/e210ee3f5a.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
+	<!-- section for the black modal bar-->
+	<div id="modal--black">
+		<div class="projectsMod" id="modal1">
+			<div class="modaltopContent">
+			<i class="fa-solid fa-pen-to-square"></i><p>Mode édition</p><button>Publier les changements</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="mainModal" class="modal">
+
+		<!-- Modal content -->
+		<section class="modal-background">
+		<span class="previous"><i class="fa-solid fa-arrow-left"></i></span>
+		  <span class="close">&times;</span>
+
+			<div class="modalContent" id="modalContent">
+				<h2>Galerie photo</h2>
+				
+			<div class="galleryPrev" id="galPv">
+			</div>
+			<hr class="solidModal">
+			<input type="submit" name ="addNewImg" value="Ajouter une photo">
+			<p id="deleteAll">Supprimer toute la gallerie</p>
+			</div>
+
+			<form name="newContent" class="newModalContent" id="newModalContent">
+				<h2>Ajout image</h2>
+
+				<div class="imgBackground">
+					<div class="newImgDisplay">
+					<i class="fa-sharp fa-regular fa-image"></i>
+					<input type="file" onchange="handleImg(files)" name="addImage" accept="image/png, image/gif, image/jpeg" id="addImage" required>
+					<label for="addImage" id="addImageLabel">+ ajouter une image</label>
+					<p>jpg, png : 4mo max</p>
+				</div>
+				<span id="preview"></span>	
+				</div>
+				
+				<div class="newImg">
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="title" required>
+					
+					<label for="category-select">Catégories</label>
+						<select id="category-select" name="category-select">
+							<option value="1">Objets</option>
+							<option value="2">Appartements</option>
+							<option value="3">Hôtels & restaurants</option>
+						</select>
+				</div>
+				<hr class="solidModal">
+				<button id="validateButton"  type="submit">valider</button>
+			</form>
+		</section>
+	  </div>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a href="login.html" id="loginId">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -26,6 +82,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<div class="projectsMod" id="modal2"><i class="fa-solid fa-pen-to-square"></i><p>modifier</p></div>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -35,7 +92,10 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="projects">
+			<h2>Mes Projets</h2>
+			<div class="projectsMod" id="modal3"><i class="fa-solid fa-pen-to-square"></i><p>modifier</p></div>
+		</div>
 		<section class ="categories">
 		</section>
 		<div class="gallery">
@@ -44,9 +104,9 @@
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
+		<form>
 			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
+			<input type="text" name="name" id="name" >
 			<label for="email">Email</label>
 			<input type="email" name="email" id="email">
 			<label for="message">Message</label>
@@ -63,6 +123,7 @@
 		</ul>
 	</nav>
 </footer>
-<script src="./assets/script.js"></script>
+	<script src="./assets/script.js"></script>
+	<script src="./assets/modal.js"></script>
 </body>
 </html>
