@@ -1,4 +1,4 @@
-let modal = document.getElementById("mainModal");
+let modal = document.getElementById('mainModal')
 
 // Get the input that opens the modal
 
@@ -60,9 +60,8 @@ async function worksDataModal() {
         //delete items 
         let imgCardRemover = document.querySelectorAll('.imgCard')
         let imgCards = document.querySelectorAll('.trashIcon')
-    
+        
         for (let i = 0; i < imgCards.length; i++){
-    
             imgCards[i].addEventListener('click', async event =>{
                 try {
                     let response = await fetch('http://localhost:5678/api/works/' + imgCards[i].id, {
@@ -112,42 +111,42 @@ previousModal.addEventListener('click', event =>{
 let preview = document.getElementById('preview')
 let hideDisplay = document.querySelector('.newImgDisplay')
 let imgPreview = document.querySelector('.imgBackground')
+let imghandler = document.querySelector('input[name=addImage]')
 
-function handleImg(files) {
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i]
+imghandler.addEventListener('change', event =>{
+  
+    for (let i = 0; i < imghandler.files.length; i++) {
+        let file = imghandler.files[i]
 
-    if(i == 0){
-        hideDisplay.style.display = "none";
-        imgPreview.style.display = "flex"
-        preview.innerHTML = '';
-      }
-      var img = document.createElement("img");
-      img.classList.add("obj");
-      img.file = file;
-      preview.appendChild(img); 
-      var reader = new FileReader();
+      hideDisplay.style.display = "none"
+      imgPreview.style.display = "flex"
+      let img = document.createElement("img")
+      img.classList.add("obj")
+      img.file = file
+      preview.appendChild(img)
+      let reader = new FileReader()
 
       reader.onload = ( function(aImg) { 
       return function(e) { 
       aImg.src = e.target.result; 
-    }; 
+    }
    })(img);
  
   reader.readAsDataURL(file);
-
+    }})
 // add new image 
-let newImg = document.getElementById('validateButton')
-  let form  = document.getElementById('newModalContent')
+  let newImg = document.getElementById('validateButton')
+  let form1  = document.getElementById('newModalContent')
 
-  form.addEventListener('submit', async event  =>{
+  form1.addEventListener('submit', async event  =>{
   event.preventDefault()
-
+  
+  for (let i = 0; i < imghandler.files.length; i++) {
   let title = document.getElementById('title').value
   let category = document.getElementById('category-select').value
 
     let formData = new FormData();
-    formData.append('image', files[0])
+    formData.append('image', imghandler.files[0])
     formData.append('title', title)
     formData.append('category', category)
 
@@ -162,25 +161,28 @@ let newImg = document.getElementById('validateButton')
     let result = await response;
 
     // function to remove items
-    let allMainImg = document.querySelectorAll('.main-content')
+
     let allimgCards = document.querySelectorAll('.imgCard')
-    for (var i = 0; i < allimgCards.length; i++){
-    let imgCardRemover = allimgCards[i]
-    let mainImgRemover = allMainImg[i]
-
+    for (let c = 0; c < allimgCards.length; c++){
+    let imgCardRemover = allimgCards[c]
     imgCardRemover.remove()
-
     }
     worksDataModal();
     // change modal display
     previousModal.style.display = "none";
     newModalContent.style.display = "none";
+
     modalContent.setAttribute('style', 'display:flex !important');
     let htmlNoScroll = document.querySelector('html')
     htmlNoScroll.setAttribute('style', 'overflow: hidden')
-
-    //reload gallery
-
+    console.log(imghandler.files[i]);
 } catch (error){
     console.error(error);
-}})}}
+}
+
+hideDisplay.style.display = "flex"
+imgPreview.style.display = "block"
+preview.innerHTML=""
+form1.reset()
+
+}})

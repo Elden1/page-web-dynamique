@@ -219,7 +219,6 @@ form.addEventListener('click', async event  =>{
     let mainImgRemover = allMainImg[i]
 
     mainImgRemover.remove()
-    console.log('passed')
     }
     worksData()
 })
