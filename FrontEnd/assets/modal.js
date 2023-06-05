@@ -20,7 +20,8 @@ let span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
-  location.reload()
+  let htmlNoScroll = document.querySelector('html')
+  htmlNoScroll.setAttribute('style', 'overflow: none')
 }
 
 // generate the images cards 
@@ -175,7 +176,6 @@ imghandler.addEventListener('change', event =>{
     modalContent.setAttribute('style', 'display:flex !important');
     let htmlNoScroll = document.querySelector('html')
     htmlNoScroll.setAttribute('style', 'overflow: hidden')
-    console.log(imghandler.files[i]);
 } catch (error){
     console.error(error);
 }

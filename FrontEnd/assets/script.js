@@ -208,6 +208,7 @@ for (let i = 0; i < allCat.length; i++){
 }}
 }
 
+// recharge the gallery when closing the modal
 let form  = document.querySelector('.close')
 
 form.addEventListener('click', async event  =>{

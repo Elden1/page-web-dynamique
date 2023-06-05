@@ -320,7 +320,7 @@ li:hover {
 	width: 12em!important;
 	color: red!important;
 }
-#modalContent input[type="submit"]{
+input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
